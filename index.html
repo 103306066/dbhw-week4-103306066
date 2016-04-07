@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>臺北市嬰幼兒照顧服務-公辦民營托嬰中心</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+    getData(function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            var bList = data.result.results;
+            var HTMLbList = bList.map(function(b) {
+                var HTMLString = "<div class='col-md-4 drop-" + (Math.round(Math.random() * 10000 % 3) + 1) + "'><h2>" + b.ORG_NAME + "</h2>";
+                var items = "";
+                for (var key in b) {
+                    if (key =="ADDRESS" || key =="PHONE" || key=="FAX" || key=="WEB_HOMEPAGE" || key=="ORG_INTRODUCTION") {
+                        items = items + "<li class='list-group-item'>" +key+ ":" + b[key] + "</li>";
+                    }
+                }
+                var HTMLString = HTMLString + items + "</div>";
+                return HTMLString;
+            });
+            HTMLbList.forEach(function(html) {
+                $(html).appendTo("#content");
+            });
+           
+        }
+    });
+});
+</script>
+</head>
+
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+                <h1>臺北市嬰幼兒照顧服務-公辦民營托嬰中心</h1>
+    </div>
+    <div id="wrapper3">
+        <div id="portfolio" class="container">
+            <div class="container">
+                <div id="content" class="row"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
